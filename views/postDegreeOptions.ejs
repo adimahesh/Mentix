@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("partials/header", { title: "Post-Degree Options - Career Advisor" }) %>
+  <script>
+    function toggleAccordion(id) {
+      const content = document.getElementById(id);
+      const icon = document.querySelector(`#${id}-icon`);
+      content.classList.toggle("max-h-0");
+      content.classList.toggle("max-h-screen");
+      icon.classList.toggle("rotate-180");
+    }
+  </script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+
+  
+  <%- include("partials/navbar") %>
+
+  <main class="flex-grow max-w-5xl mx-auto px-6 py-11">
+    <h1 class="text-4xl font-bold text-gray-800 mb-8"> Post-Degree Options</h1>
+
+    <div class="space-y-6">
+
+      
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 w-full">
+        <button onclick="toggleAccordion('option1')" 
+                class="flex justify-between items-center w-full px-6 py-4 text-left">
+          <span class="text-xl font-semibold text-indigo-700">1. Higher Studies (Post-Graduation)</span>
+          <svg id="option1-icon" xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="option1" class="px-6 pb-1 text-gray-700 w-full max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <h3 class="font-semibold mt-2">Engineering / Science students </h3>
+          <ul class="list-disc list-inside">
+            <li>M.Tech / ME (through GATE)</li>
+            <li>M.Sc. (through IIT JAM, CUET-PG)</li>
+            <li>MBA (through CAT, XAT, MAT, GMAT)</li>
+          </ul>
+          <h3 class="font-semibold mt-2">Medical students (MBBS, BDS, BAMS, etc.) </h3>
+          <ul class="list-disc list-inside">
+            <li>MD/MS, MDS, PG Diploma (through NEET-PG, INI-CET)</li>
+          </ul>
+          <h3 class="font-semibold mt-2">Commerce students (B.Com, BBA, BBM, etc.)</h3>
+          <ul class="list-disc list-inside">
+            <li>MBA, M.Com, PGDM, CFA, CPA</li>
+          </ul>
+          <h3 class="font-semibold mt-2">Arts students (BA, BSW, BJMC, etc.) </h3>
+          <ul class="list-disc list-inside">
+            <li>MA, MSW, LLB, Journalism PG courses, UPSC prep</li>
+          </ul>
+        </div>
+      </div>
+
+      
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 w-full">
+        <button onclick="toggleAccordion('option2')" 
+                class="flex justify-between items-center w-full px-6 py-4 text-left">
+          <span class="text-xl font-semibold text-green-700">2. Professional Certifications</span>
+          <svg id="option2-icon" xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="option2" class="px-6 pb-1 text-gray-700 w-full max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <p><strong>Engineering/Tech:</strong> Data Science, AI/ML, Cloud (AWS, Azure), Cybersecurity, Software Certifications.</p>
+          <p><strong>Commerce:</strong> CA, CS, CMA, CFA, ACCA, FRM.</p>
+          <p><strong>Arts/Humanities:</strong> Digital Marketing, UX/UI, Language Certifications, Teaching (B.Ed., TESOL).</p>
+          <p><strong>Medical/Science:</strong> Clinical Research, Lab Tech, Paramedical, Hospital Administration.</p>
+        </div>
+      </div>
+
+      
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 w-full">
+        <button onclick="toggleAccordion('option3')" 
+                class="flex justify-between items-center w-full px-6 py-4 text-left">
+          <span class="text-xl font-semibold text-pink-700">3. Government Exams</span>
+          <svg id="option3-icon" xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="option3" class="px-6 pb-1 text-gray-700 w-full max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <ul class="list-disc list-inside">
+            <li>UPSC Civil Services → IAS, IPS, IFS, IRS</li>
+            <li>SSC (CGL, CHSL, CPO, JE) → Central Govt. jobs</li>
+            <li>Banking & Insurance → IBPS PO/Clerk, SBI PO/Clerk, RBI Grade-B, LIC, NIACL</li>
+            <li>Railways (RRB) → NTPC, JE, Group-D</li>
+            <li>Defence Services → CDS, AFCAT, CAPF</li>
+            <li>State Govt. Exams → Groups (APPSC, TSPSC, MPSC, KPSC, etc.)</li>
+          </ul>
+        </div>
+      </div>
+
+      
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 w-full">
+        <button onclick="toggleAccordion('option4')" 
+                class="flex justify-between items-center w-full px-6 py-4 text-left">
+          <span class="text-xl font-semibold text-blue-700">4. Private Sector Jobs</span>
+          <svg id="option4-icon" xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="option4" class="px-6 pb-1 text-gray-700 w-full max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <p><strong>Engineering/Science:</strong> IT, Core Companies, Startups, Research Labs.</p>
+          <p><strong>Commerce:</strong> Banking, Finance, Accounting, Consulting, Auditing.</p>
+          <p><strong>Arts:</strong> Journalism, Advertising, Teaching, NGOs, Content Creation.</p>
+          <p><strong>Medical:</strong> Hospitals, Clinics, Pharma Companies, Health Tech.</p>
+        </div>
+      </div>
+
+      
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 w-full">
+        <button onclick="toggleAccordion('option5')" 
+                class="flex justify-between items-center w-full px-6 py-4 text-left">
+          <span class="text-xl font-semibold text-purple-700">5. Study Abroad</span>
+          <svg id="option5-icon" xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="option5" class="px-6 pb-1 text-gray-700 w-full max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <p><strong>Masters:</strong> MS, MBA, MIM, MPH in USA, UK, Canada, Europe, Australia.</p>
+          <p><strong>Exams:</strong> GRE, GMAT, IELTS, TOEFL, PTE.</p>
+          <p><strong>Careers:</strong> Global industries, research, or academia.</p>
+        </div>
+      </div>
+
+      
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 w-full">
+        <button onclick="toggleAccordion('option6')" 
+                class="flex justify-between items-center w-full px-6 py-4 text-left">
+          <span class="text-xl font-semibold text-orange-700">6. Entrepreneurship & Startups</span>
+          <svg id="option6-icon" xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="option6" class="px-6 pb-1 text-gray-700 w-full max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <p>Start your own business, consultancy, or startup. Build on your degree skills.</p>
+          <p>Govt. support: Startup India, MSME schemes, Incubators.</p>
+        </div>
+      </div>
+
+      
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 w-full">
+        <button onclick="toggleAccordion('option7')" 
+                class="flex justify-between items-center w-full px-6 py-4 text-left">
+          <span class="text-xl font-semibold text-red-700">7. Teaching & Research</span>
+          <svg id="option7-icon" xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 text-gray-600 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="option7" class="px-6 pb-1 text-gray-700 w-full max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+          <ul class="list-disc list-inside">
+            <li>NET/SET (UGC/CSIR) → Assistant Professor, JRF</li>
+            <li>PhD → Academic & Research careers</li>
+            <li>School Teaching → B.Ed. + TET/CTET exams</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+ 
+  <footer class="bg-gray-100 text-gray-600 text-center">
+    <%- include("partials/footer") %>
+  </footer>
+
+</body>
+</html>

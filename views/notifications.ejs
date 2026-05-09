@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><% include ./partials/header.ejs %></head>
+<body>
+  <% include ./partials/navbar.ejs %>
+
+  <div class="container my-5">
+    <h3>Notifications & Timeline</h3>
+    <div class="list-group">
+      <% notifications.forEach(n => { %>
+        <a class="list-group-item list-group-item-action mb-2">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= n.title %></h5>
+            <small><%= n.date ? new Date(n.date).toDateString() : '' %></small>
+          </div>
+          <p class="mb-1"><%= n.description %></p>
+          <% if (n.link) { %>
+            <small><a href="<%= n.link %>">More</a></small>
+          <% } %>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+
+  <% include ./partials/footer.ejs %>
+</body>
+</html>

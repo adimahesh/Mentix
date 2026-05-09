@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("partials/header", { title: title }) %>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+
+
+  <%- include("partials/navbar") %>
+
+  <main class="flex-grow max-w-5xl mx-auto px-6 py-11 text-center">
+
+    
+    <h1 class="text-3xl font-bold text-gray-800 mb-6"><%= title %> Flowchart</h1>
+
+    
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <img src="../public/images/<%= image %>" 
+           alt="<%= title %> Flowchart" 
+           class="mx-auto max-h-[600px] w-auto object-contain">
+    </div>
+
+    
+    <div class="mt-8">
+      <a href="/careerPaths" 
+         class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-indigo-700 transition">
+         Back to Career Options
+      </a>
+    </div>
+
+  </main>
+
+  
+  <footer class="bg-gray-100 text-gray-600 text-center">
+    <%- include("partials/footer") %>
+  </footer>
+
+</body>
+</html>

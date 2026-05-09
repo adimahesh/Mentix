@@ -1,0 +1,17 @@
+<nav class="bg-gray-900 text-white shadow-md">
+  <div class="container mx-auto flex items-center justify-between p-4">
+    <a href="/" class="text-2xl font-bold text-indigo-400">Mentix</a>
+    <ul class="flex space-x-6">
+      <li><a href="/" class="hover:text-indigo-300">Home</a></li>
+      <% if (user) { %>
+        <li><a href="/dashboard" class="hover:text-indigo-300">Dashboard</a></li>
+        <li><a href="/colleges" class="hover:text-indigo-300">Colleges</a></li>
+        <li><a href="/resources" class="hover:text-indigo-300">Resources</a></li>
+        <li><a href="/logout" class="text-red-400 hover:text-red-500">Logout</a></li>
+      <% } else { %>
+        <li><a href="/login" class="hover:text-indigo-300">Login</a></li>
+        <li><a href="/signup" class="hover:text-indigo-300">Signup</a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

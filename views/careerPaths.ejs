@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("partials/header", { title: "Career Paths - Career Advisor" }) %>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+
+  
+  <%- include("partials/navbar") %>
+
+  <main class="flex-grow max-w-7xl mx-auto px-6 py-11">
+
+    
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-4">
+      <h1 class="text-4xl font-bold text-gray-800"> Career Paths</h1>
+      <p class="text-gray-600 text-lg">Select a career option to view its flowchart.</p>
+    </div>
+
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <% const careers = [
+        { id: "engineering", title: "Engineering", color: "text-indigo-600" },
+        { id: "medical", title: "Medical", color: "text-green-600" },
+        { id: "commerce", title: "Commerce", color: "text-yellow-600" },
+        { id: "arts", title: "Arts & Humanities", color: "text-pink-600" },
+        { id: "defence", title: "Defence", color: "text-red-600" },
+        {id:"fashion",title:"Fashion Designing",color:"text-purple-600"},
+        {id:"Policeofficer",title:"Police officer",color:"text-blue-600"},
+        {id:"Teacher",title:"Teacher",color:"text-yellow-800"},
+        {id:"Defence",title:"Defense",color:"text-red-800"}
+      ]; %>
+
+      <% careers.forEach(career => { %>
+        <a href="/careerPaths/<%= career.id %>" 
+           class="bg-white rounded-xl shadow hover:shadow-xl transition block p-6">
+          <h2 class="text-xl font-semibold <%= career.color %> mb-2"><%= career.title %></h2>
+          <p class="text-gray-600 text-sm">Click to view <%= career.title %> flowchart</p>
+        </a>
+      <% }); %>
+
+    </div>
+
+  </main>
+
+  
+  <footer class="bg-gray-100 text-gray-600 text-center">
+    <%- include("partials/footer") %>
+  </footer>
+
+</body>
+</html>

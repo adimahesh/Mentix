@@ -1,0 +1,6 @@
+/* custom small tweaks */
+body { background: #f8fafc; }
+.card-custom { border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.header-hero { background: linear-gradient(90deg,#4f46e5, #06b6d4); color: white; padding: 4rem 0; }
+footer { margin-top: 4rem; padding: 2rem 0; text-align: center; color: #6b7280; }
+.small-muted { color: #6b7280; font-size: 0.9rem; }

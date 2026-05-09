@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("partials/header", { title: "Recommendations - Career Advisor" }) %>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+
+
+  <%- include("partials/navbar") %>
+
+  
+  <main class="flex-grow container mx-auto px-6 py-12">
+    <div class="bg-white rounded-xl shadow-md p-8">
+      <h3 class="text-3xl font-bold text-gray-800 mb-6">🎯 Your Recommendations</h3>
+
+      <% if (!recommendations || !recommendations.stream) { %>
+        <p class="text-gray-600 text-lg">
+          No recommendations yet. 
+          <a href="/quiz" class="text-indigo-600 hover:text-indigo-800 font-medium underline">
+            Take the quiz
+          </a> 
+          to get personalized suggestions.
+        </p>
+      <% } else { %>
+        <div class="space-y-4">
+          <p class="text-lg text-gray-700">
+            <strong class="text-gray-900">Stream:</strong> <%= recommendations.stream %>
+          </p>
+
+          <p class="text-lg text-gray-700">
+            <strong class="text-gray-900">Suggested Courses:</strong> 
+            <%= (recommendations.courses || []).join(", ") %>
+          </p>
+
+          <p class="text-lg text-gray-700">
+            <strong class="text-gray-900">Possible Careers:</strong> 
+            <%= (recommendations.careers || []).join(", ") %>
+          </p>
+        </div>
+
+        <hr class="my-6 border-gray-200">
+
+        <div>
+          <h5 class="text-xl font-semibold text-gray-800 mb-2">🏫 Suggested Colleges</h5>
+          <p class="text-gray-600">
+            Search our 
+            <a href="/colleges" class="text-indigo-600 hover:text-indigo-800 underline">
+              colleges directory
+            </a> 
+            to find institutions offering these courses.
+          </p>
+        </div>
+      <% } %>
+    </div>
+  </main>
+
+  
+  <footer class="bg-gray-100 text-gray-600 text-center mt-auto shadow-inner">
+    <%- include("partials/footer", { user: user || null }) %>
+  </footer>
+
+</body>
+</html>

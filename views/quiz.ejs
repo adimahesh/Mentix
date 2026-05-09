@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("partials/header", { title: "Career Quiz - Career Advisor" }) %>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 font-sans">
+  <%- include("partials/navbar") %>
+
+  <main class="flex-grow flex items-center justify-center py-12 px-6 ">
+    <form id="quizForm" method="POST" action="/quiz" class="bg-white w-full max-w-3xl shadow-lg rounded-2xl p-8 space-y-6">
+      <h1 class="text-2xl font-bold text-gray-800 text-center">Aptitude & Interest Quiz</h1>
+      <p class="text-gray-500 text-center">Answer honestly — results will recommend a stream after Class 10 and guidance after Class 12.</p>
+
+      
+      <div>
+        <label class="block text-lg font-medium text-gray-700 mb-2">1) Which subject(s) do you enjoy most?</label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <label class="flex items-center gap-3">
+            <input type="checkbox" name="likes[]" value="math"> Mathematics
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" name="likes[]" value="physics"> Physics
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" name="likes[]" value="chemistry"> Chemistry
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" name="likes[]" value="biology"> Biology
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" name="likes[]" value="accounts"> Accounts/Business
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" name="likes[]" value="history"> Social Studies/History
+          </label>
+          <label class="flex items-center gap-3">
+            <input type="checkbox" name="likes[]" value="arts"> Arts/Design
+          </label>
+        </div>
+      </div>
+
+      
+      <div>
+        <label class="block text-lg font-medium text-gray-700 mb-2">2) What kind of tasks do you prefer?</label>
+        <select name="taskType" class="w-full p-3 border rounded-lg" required>
+          <option value="">Choose</option>
+          <option value="problem">Problem solving / Logic</option>
+          <option value="hands">Hands-on / Practical</option>
+          <option value="creative">Creative / Design / Writing</option>
+          <option value="business">Business / Numbers</option>
+          <option value="helping">Helping people / Health</option>
+        </select>
+      </div>
+
+   
+      <div>
+        <label class="block text-lg font-medium text-gray-700 mb-2">3) Which of these describes you best?</label>
+        <select name="strength" class="w-full p-3 border rounded-lg" required>
+          <option value="">Choose</option>
+          <option value="analytical">Analytical / Data-minded</option>
+          <option value="practical">Practical / Skilled</option>
+          <option value="communicator">Good communication</option>
+          <option value="creative">Highly creative</option>
+          <option value="leader">Leader / Entrepreneur</option>
+        </select>
+      </div>
+
+      
+      <div>
+        <label class="block text-lg font-medium text-gray-700 mb-2">4) Long-term do you prefer:</label>
+        <select name="longTerm" class="w-full p-3 border rounded-lg" required>
+          <option value="">Choose</option>
+          <option value="job">A steady job quickly</option>
+          <option value="degree">Higher degree & research</option>
+          <option value="business">Start a business</option>
+          <option value="service">Defence / Government service</option>
+        </select>
+      </div>
+
+      
+      <div>
+        <label class="block text-lg font-medium text-gray-700 mb-2">5) Are you open to entrance exams and competitive tests?</label>
+        <select name="examOpenness" class="w-full p-3 border rounded-lg" required>
+          <option value="">Choose</option>
+          <option value="yes">Yes — I will prepare</option>
+          <option value="maybe">Maybe — prefer easier paths</option>
+          <option value="no">No — prefer skill courses / direct jobs</option>
+        </select>
+      </div>
+
+      
+      <div>
+        <label class="block text-lg font-medium text-gray-700 mb-2">6) Do you already prefer any intermediate group (optional)?</label>
+        <select name="prefIntermediate" class="w-full p-3 border rounded-lg">
+          <option value="">No preference</option>
+          <option value="MPC">MPC (Maths, Physics, Chemistry)</option>
+          <option value="BIPC">BiPC (Biology, Physics, Chemistry)</option>
+          <option value="Commerce">Commerce</option>
+          <option value="Arts">Arts / Humanities</option>
+          <option value="Vocational">Vocational / Diploma</option>
+        </select>
+      </div>
+
+      
+      <div class="text-center">
+        <button type="submit" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 transition">
+          Get Recommendations
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <%- include("partials/footer") %>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("partials/header") %>
+</head>
+<body class="bg-gray-50">
+  <%- include("partials/navbar") %>
+
+  
+  <section class="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-indigo-100 to-blue-200">
+    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
+      One-stop Personalized Career & Education Advisor
+    </h1>
+    <p class="text-lg md:text-xl text-gray-700 max-w-2xl mb-6">
+      Choose the right stream, find nearby government colleges, and plan your career with confidence.
+    </p>
+    <div class="space-x-4">
+      <a href="/quiz" class="px-6 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700">Take the Quiz</a>
+      <a href="/colleges" class="px-6 py-3 bg-white text-indigo-600 border border-indigo-600 rounded-lg shadow hover:bg-indigo-50">Explore Colleges</a>
+    </div>
+  </section>
+
+  
+  <div id="chatbot-container" class="fixed bottom-20 right-6 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden hidden">
+    
+    <div class="bg-indigo-600 text-white px-4 py-3 flex justify-between items-center">
+      <h3 class="font-bold text-lg">AI Career Chatbot 🤖</h3>
+      <button onclick="toggleChatbot()" class="text-white hover:text-gray-200">&times;</button>
+    </div>
+
+    
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 max-h-80">
+      <div class="text-gray-600 text-sm"> Hi! I’m your Career Advisor bot. Ask me anything about colleges, careers, or courses.</div>
+    </div>
+
+   
+    <div class="p-5 border-t bg-white flex gap-4">
+      <input id="chat-input" 
+             type="text" 
+             placeholder="Type your message..." 
+             class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm" />
+      <button onclick="sendMessage()" 
+              class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm">Send</button>
+    </div>
+  </div>
+
+  
+  <button onclick="toggleChatbot()" 
+          class="fixed bottom-6 right-6 bg-indigo-600 text-white rounded-full p-4 shadow-lg hover:bg-indigo-700 focus:outline-none">
+    💬
+  </button>
+
+  <%- include("partials/footer") %>
+
+  
+<script>
+function toggleChatbot() {
+  document.getElementById("chatbot-container").classList.toggle("hidden");
+}
+
+async function sendMessage() {
+  const input = document.getElementById("chat-input");
+  const message = input.value.trim();
+  if (!message) return;
+
+  const messages = document.getElementById("chat-messages");
+  messages.innerHTML += `
+    <div class="self-end bg-indigo-600 text-white px-4 py-2 rounded-lg max-w-xs ml-auto">
+      ${message}
+    </div>`;
+  input.value = "";
+
+  try {
+    const res = await fetch("/chatbot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await res.json();
+
+    messages.innerHTML += `
+      <div class="self-start bg-gray-200 px-4 py-2 rounded-lg max-w-xs">
+        ${data.reply}
+      </div>`;
+    messages.scrollTop = messages.scrollHeight;
+  } catch (err) {
+    messages.innerHTML += `
+      <div class="self-start bg-red-200 px-4 py-2 rounded-lg max-w-xs">
+         ${err.message}
+      </div>`;
+  }
+}
+</script>
+
+</body>
+</html>

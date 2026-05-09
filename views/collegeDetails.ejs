@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><% include ./partials/header.ejs %></head>
+<body>
+  <% include ./partials/navbar.ejs %>
+
+  <div class="container my-5">
+    <div class="card card-custom p-4">
+      <h3><%= college.name %></h3>
+      <p class="small-muted"><%= college.location %></p>
+      <p><strong>Courses:</strong> <%= college.courses.join(", ") %></p>
+      <p><strong>Cutoff:</strong> <%= college.cutoff %></p>
+      <p><strong>Facilities:</strong> <%= college.facilities.join(", ") %></p>
+      <p><strong>Contact:</strong> <%= college.contact %></p>
+      <a href="/colleges" class="btn btn-outline-secondary">Back to list</a>
+    </div>
+  </div>
+
+  <% include ./partials/footer.ejs %>
+</body>
+</html>
