@@ -1,70 +1,37 @@
 const express = require("express");
+const router = express.Router();
 const fs = require("fs");
 const path = require("path");
-const router = express.Router();
 
-// Authentication middleware
-function isAuth(req, res, next) {
-  if (req.session.user) return next();
-  res.redirect("/login");
-}
+// Load college data from JSON file
+const collegesData = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/college-list.json"), "utf-8")
+);
 
+router.get("/", (req, res) => {
+  const { location, selected } = req.query;
 
-const collegesFile = path.join(__dirname, "../data/college-list.json");
+  let colleges = [];
+  let selectedCollege = null;
 
-// GET /colleges
-router.get("/", isAuth, (req, res) => {
-  let allColleges = JSON.parse(fs.readFileSync(collegesFile, "utf-8"));
-
-  const colleges = allColleges.map((c, index) => ({
-    id: c["S. No."] || index + 1,
-    university: c["University Name"],
-    name: c["College Name"],
-    type: c["College Type"],
-    state: c["State Name"],
-    district: c["District Name"],
-    courses: ["Engineering","Medical","Commerce","Arts"], // Placeholder
-    facilities: ["Library","Hostel","Sports","Labs"] // Placeholder
-  }));
-
-  const { location, courses: selectedCourses, facilities: selectedFacilities, selected } = req.query;
-
-  
-const hasFilters = location || selectedCourses || selectedFacilities;
-
-
-let filteredColleges = [];
-if (hasFilters) {
-  filteredColleges = [...colleges];
-
-  if (location) {
-    filteredColleges = filteredColleges.filter(col =>
-      col.state.toLowerCase().includes(location.toLowerCase()) ||
-      col.district.toLowerCase().includes(location.toLowerCase())
+  if (location && location.trim() !== "") {
+    const query = location.trim().toLowerCase();
+    colleges = collegesData.filter(
+      (col) =>
+        col["District Name"]?.toLowerCase().includes(query) ||
+        col["State Name"]?.toLowerCase().includes(query)
     );
   }
 
-  if (selectedCourses) {
-    const arr = Array.isArray(selectedCourses) ? selectedCourses : [selectedCourses];
-    filteredColleges = filteredColleges.filter(col => col.courses.some(c => arr.includes(c)));
-  }
-
-  if (selectedFacilities) {
-    const arr = Array.isArray(selectedFacilities) ? selectedFacilities : [selectedFacilities];
-    filteredColleges = filteredColleges.filter(col => col.facilities.some(f => arr.includes(f)));
-  }
-}
-
-  let selectedCollege = null;
   if (selected) {
-    selectedCollege = colleges.find(col => col.id.toString() === selected.toString());
+    selectedCollege =
+      colleges.find((col) => col["College Name"] === selected) || null;
   }
 
   res.render("colleges", {
-    title: "Government Colleges - Career Advisor",
-    colleges: filteredColleges,
+    colleges,
     selectedCollege,
-    req
+    location: location || "",
   });
 });
 

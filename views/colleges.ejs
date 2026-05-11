@@ -7,21 +7,20 @@
 
   <%- include("partials/navbar") %>
 
-  
   <main class="flex-grow max-w-7xl mx-auto px-6 py-11">
-    
-    
+
+    <!-- Header + Search -->
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-4">
-      <h1 class="text-4xl font-bold text-gray-800"> Government Colleges</h1>
+      <h1 class="text-4xl font-bold text-gray-800">Government Colleges</h1>
       <form class="flex w-full md:w-auto gap-2" method="GET" action="/colleges">
         <input
           type="text"
           name="location"
-          placeholder=" Search by location"
-          value="<%= typeof req !== 'undefined' ? (req.query.location || '') : '' %>"
+          placeholder="Search by district or state"
+          value="<%= typeof location !== 'undefined' ? location : '' %>"
           class="flex-grow px-4 py-2 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
-        <button 
+        <button
           type="submit"
           class="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 transition">
           Search
@@ -29,71 +28,58 @@
       </form>
     </div>
 
-    
-    <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-8">
-      
-     
-            <% ["Engineering","Medical","Commerce","Arts"].forEach(c => { %>
-              <label class="flex items-center gap-2 text-gray-600">
-                <input type="checkbox" name="courses" value="<%= c %>"
-                  <%= req.query.courses && req.query.courses.includes(c) ? "checked" : "" %>> <%= c %>
-              </label>
-            <% }) %>
-          </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
 
-          <div>
-            <h3 class="font-medium text-gray-700 mb-2">Facilities</h3>
-            <% ["Library","Hostel","Sports","Labs"].forEach(f => { %>
-              <label class="flex items-center gap-2 text-gray-600">
-                <input type="checkbox" name="facilities" value="<%= f %>"
-                  <%= req.query.facilities && req.query.facilities.includes(f) ? "checked" : "" %>> <%= f %>
-              </label>
-            <% }) %>
-          </div>
-
-          <button type="submit" class="w-full py-2 text-indigo-600 border border-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition">
-            Apply Filters
-          </button>
-        </form>
-      </aside> 
-
-      
+      <!-- College List -->
       <section class="md:col-span-2 lg:col-span-3 grid grid-cols-1 gap-6">
-        <% if (colleges.length === 0) { %>
-          <p class="text-gray-600 text-lg">No colleges found. Try another search or filter.</p>
+
+        <% if (typeof colleges === 'undefined' || colleges.length === 0) { %>
+          <% if (typeof location !== 'undefined' && location !== '') { %>
+            <p class="text-gray-600 text-lg">No colleges found for "<strong><%= location %></strong>". Try another location.</p>
+          <% } else { %>
+            <p class="text-gray-500 text-lg">Enter a district or state name above to search for colleges.</p>
+          <% } %>
         <% } else { %>
+          <p class="text-gray-500 text-sm"><%= colleges.length %> college(s) found</p>
           <% colleges.forEach(col => { %>
-            <div class="bg-white rounded-xl shadow hover:shadow-xl transition p-6">
+            <a
+              href="/colleges?location=<%= encodeURIComponent(location) %>&selected=<%= encodeURIComponent(col['College Name']) %>"
+              class="block bg-white rounded-xl shadow hover:shadow-xl transition p-6 border-l-4 <%= selectedCollege && selectedCollege['College Name'] === col['College Name'] ? 'border-indigo-600' : 'border-transparent' %>">
               <h3 class="text-lg font-semibold text-indigo-600 hover:text-indigo-800 mb-1">
-                <a href="/colleges?selected=<%= col.id %><%= req.query.location ? '&location='+req.query.location : '' %>">
-                  <%= col.name %>
-                </a>
+                <%= col['College Name'] %>
               </h3>
-              <p class="text-gray-500 text-sm"> <%= col.university %></p>
-              <p class="text-gray-500 text-sm"> <%= col.district %>, <%= col.state %></p>
-              <p class="text-gray-700 text-sm"><strong>Type:</strong> <%= col.type %></p>
-            </div>
+              <p class="text-gray-500 text-sm">🏫 <%= col['University Name'] %></p>
+              <p class="text-gray-500 text-sm">📍 <%= col['District Name'] %>, <%= col['State Name'] %></p>
+              
+            </a>
           <% }) %>
         <% } %>
       </section>
 
-      
-     <aside class="md:col-span-1 lg:col-span-2 bg-white p-6 rounded-xl shadow-md
-             w-full max-w-md h-[500px] overflow-y-auto">
-  <% if (selectedCollege) { %>
-    <h2 class="text-2xl font-bold text-indigo-700 mb-3"><%= selectedCollege.name %></h2>
-    <p class="text-gray-600 mb-2"> <strong>University:</strong> <%= selectedCollege.university %></p>
-    <p class="text-gray-600 mb-2"> <strong>Type:</strong> <%= selectedCollege.type %></p>
-    <p class="text-gray-600 mb-2"> <strong>District:</strong> <%= selectedCollege.district %></p>
-    <p class="text-gray-600 mb-2"> <strong>State:</strong> <%= selectedCollege.state %></p>
-  <% } else { %>
-    <p class="text-gray-500"> Select a college to view its details.</p>
-  <% } %>
-  </aside>
+      <!-- College Detail Aside -->
+      <aside class="md:col-span-1 lg:col-span-2 bg-white p-6 rounded-xl shadow-md w-full h-[500px] overflow-y-auto sticky top-6">
+        <% if (typeof selectedCollege !== 'undefined' && selectedCollege) { %>
+          <h2 class="text-2xl font-bold text-indigo-700 mb-4"><%= selectedCollege['College Name'] %></h2>
+          <div class="space-y-3 text-gray-700 text-sm">
+            <p>🏛️ <strong>University:</strong> <%= selectedCollege['University Name'] %></p>
+            <p>🏷️ <strong>Type:</strong> <%= selectedCollege['College Type'] %></p>
+            <p>📍 <strong>District:</strong> <%= selectedCollege['District Name'] %></p>
+            <p>🗺️ <strong>State:</strong> <%= selectedCollege['State Name'] %></p>
+          </div>
+        <% } else { %>
+          <div class="flex flex-col items-center justify-center h-full text-center text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0 0H9m3 0h3" />
+            </svg>
+            <p class="text-lg font-medium">Select a college</p>
+            <p class="text-sm mt-1">Click any college to view its details here</p>
+          </div>
+        <% } %>
+      </aside>
+
     </div>
   </main>
 
-  
   <footer class="bg-gray-100 text-gray-600 text-center">
     <%- include("partials/footer") %>
   </footer>
